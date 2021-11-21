@@ -1,47 +1,12 @@
-call pathogen#infect()
 set guifont=DroidSansMono\ Nerd\ Font\ 11
 set encoding=UTF-8
 set number 
 set updatetime=100
 set number relativenumber
 set nocompatible              " be iMproved, required
-filetype off                  " required
-syntax on
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on
 
 
 call plug#begin('~/.vim/plugged')
-
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'davidhalter/jedi-vim'
@@ -54,12 +19,9 @@ Plug 'Yggdroot/indentLine'
 "Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'ayu-theme/ayu-vim' " or other package manager
 Plug 'NLKNguyen/papercolor-theme'
-
 "--------------------------------
-Plug 'JuliaEditorSupport/julia-vim'
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plug 'benekastah/neomake'
-Plug 'zyedidia/julialint.vim'
 Plug 'prabirshrestha/vim-lsp'
 "if has('nvim') || has('patch-8.0.902')
 "  Plug 'mhinz/vim-signify'
@@ -101,26 +63,6 @@ Plug '~/my-prototype-plugin'
 
 " Initialize plugin system
 call plug#end()
-
-
-"----------------julia--------------------------
-"let g:default_julia_version = '1.0'
-
-" language server
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {
-\   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
-\       using LanguageServer;
-\       using Pkg;
-\       import StaticLint;
-\       import SymbolServer;
-\       env_path = dirname(Pkg.Types.Context().env.project_file);
-\
-\       server = LanguageServer.LanguageServerInstance(stdin, stdout, env_path, "");
-\       server.runlinter = true;
-\       run(server);
-\   ']
-\ }
 
 
 nnoremap <silent> <F2> :RelativizeToggle<CR>
